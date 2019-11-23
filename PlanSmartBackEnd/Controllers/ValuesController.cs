@@ -7,6 +7,7 @@ using System.Web.Http;
 using PlanSmartBackEnd.Models;
 using System.Data.SqlClient;
 using System.Web.Http.Cors;
+using System.Configuration;
 
 namespace PlanSmartBackEnd.Controllers
 {
@@ -25,17 +26,28 @@ namespace PlanSmartBackEnd.Controllers
         }
 
         // POST api/values
-        [EnableCors(origins: "*","*","*")]
+        [EnableCors(origins: "*", "*", "*")]
         public IEnumerable<string> Post([FromBody]UserModel user)
         {
-            string conneciionString = @"Data Source=DESKTOP-GLPCHOA;Initial Catalog=Todo;User ID=DESKTOP-GLPCHOA\Jethro; Integrated Security=true";
+            string conneciionString = ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(conneciionString);
             connection.Open();
 
-            string sqlQuery = $"INSERT INTO [dbo].[User] ([name] ,[lastName] ,[email] ,[userName] ,[password]) VALUES ('{user.name}',  '{user.lastName}', '{user.email}', '{user.userName}', '{user.password}')";
+            string sqlQuery = "UserInsert";
 
             SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@Name", user.name);
+            command.Parameters.AddWithValue("@LastName", user.lastName);
+            command.Parameters.AddWithValue("@Email", user.email);
+            command.Parameters.AddWithValue("@Username", user.userName);
+            command.Parameters.AddWithValue("@Password", user.password);
+
             command.ExecuteNonQuery();
+            ;
+
             return new string[] { user.name, user.lastName, user.email };
         }
 

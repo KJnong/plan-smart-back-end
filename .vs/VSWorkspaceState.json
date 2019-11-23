@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\PlanSmartBackEnd",
+    "\\PlanSmartBackEnd\\App_Start",
+    "\\PlanSmartBackEnd\\Controllers",
+    "\\PlanSmartBackEnd\\Models",
+    "\\PlanSmartBackEnd\\Views",
+    "\\PlanSmartBackEnd\\Views\\Home"
+  ],
+  "SelectedNode": "\\PlanSmartBackEnd\\Controllers\\ValuesController.cs",
+  "PreviewInSolutionExplorer": false
+}
