@@ -22,7 +22,7 @@ namespace PlanSmartBackEnd.Controllers
             SqlConnection connection = new SqlConnection(itemsConnection);
             connection.Open();
 
-            string itemQuery = $"select * from ToDo.dbo.[items] where dbo.[items].item_id = {userId.id} ;";
+            string itemQuery = $"select * from plansmart.dbo.[items] where dbo.[items].user_id = {userId.id} ;";
             SqlCommand itemCommand = new SqlCommand(itemQuery, connection);
             SqlDataReader results = itemCommand.ExecuteReader();
            

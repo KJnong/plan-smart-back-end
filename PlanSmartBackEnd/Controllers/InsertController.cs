@@ -33,13 +33,10 @@ namespace PlanSmartBackEnd.Controllers
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
 
-            string sqlQuery = $"insert into ToDo.dbo.[items](date , commitment , item_id) values ('{insert.date}' , '{insert.commitment}' , {insert.item_id} )";
+            string sqlQuery = $"insert into plansmart.dbo.[items](date , commitment , user_id) values ('{insert.date}' , '{insert.commitment}' , {insert.item_id} )";
 
             SqlCommand command = new SqlCommand(sqlQuery, connection);
-
-
             command.ExecuteNonQuery();
-          
 
         }
 
@@ -50,8 +47,20 @@ namespace PlanSmartBackEnd.Controllers
         }
 
         // DELETE: api/Insert/5
+        [EnableCors(origins: "*", "*", "*")]
         public void Delete(int id)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string sqlQuery = $"DELETE FROM plansmart.dbo.[items] WHERE id = {id} ";
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+
+            command.ExecuteNonQuery();
+            
         }
     }
 }

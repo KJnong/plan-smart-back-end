@@ -33,7 +33,7 @@ namespace PlanSmartBackEnd.Controllers
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
 
-            string sqlQuery = $"select * FROM ToDo.dbo.[user] WHERE userName = '{userLogin.userName}' AND password ='{userLogin.password}'";
+            string sqlQuery = $"select * FROM plansmart.dbo.[user] WHERE userName = '{userLogin.userName}' AND password ='{userLogin.password}'";
 
             SqlCommand command = new SqlCommand(sqlQuery, connection);
             SqlDataReader results = command.ExecuteReader();
