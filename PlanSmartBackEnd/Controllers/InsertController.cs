@@ -37,6 +37,8 @@ namespace PlanSmartBackEnd.Controllers
 
             SqlCommand command = new SqlCommand(sqlQuery, connection);
             command.ExecuteNonQuery();
+            connection.Close();
+
 
         }
 

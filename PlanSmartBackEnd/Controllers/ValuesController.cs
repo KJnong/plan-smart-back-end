@@ -33,17 +33,19 @@ namespace PlanSmartBackEnd.Controllers
             SqlConnection connection = new SqlConnection(conneciionString);
             connection.Open();
 
-            string sqlQuery = "UserInsert";
+            string sqlQuery = $"INSERT INTO plansmart.dbo.[user](name, lastName, email, userName, password) VALUES('{user.name}', '{user.lastName}', '{user.email}', '{user.userName}', '{user.password}')";
 
             SqlCommand command = new SqlCommand(sqlQuery, connection);
 
+            /*
+            string sqlQuery = "UserInsert";
             command.CommandType = System.Data.CommandType.StoredProcedure;
 
             command.Parameters.AddWithValue("@Name", user.name);
             command.Parameters.AddWithValue("@LastName", user.lastName);
             command.Parameters.AddWithValue("@Email", user.email);
             command.Parameters.AddWithValue("@Username", user.userName);
-            command.Parameters.AddWithValue("@Password", user.password);
+            command.Parameters.AddWithValue("@Password", user.password);*/
 
             command.ExecuteNonQuery();
             ;
