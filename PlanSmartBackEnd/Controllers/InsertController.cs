@@ -44,8 +44,19 @@ namespace PlanSmartBackEnd.Controllers
 
         // PUT api/values/5
         // PUT: api/Insert/5
-        public void Put(int id, [FromBody]string value)
+        [EnableCors(origins: "*", "*", "*")]
+        public void Put(int id, [FromBody] string insert)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string sqlQuery = $"UPDATE dbo.items SET commitment='{insert}' WHERE id='{id}'; ";
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            command.ExecuteNonQuery();
+            connection.Close();
         }
 
         // DELETE: api/Insert/5
